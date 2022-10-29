@@ -14,4 +14,3 @@ for i in range(3):
             a = input('Введите число: ')
 
     print('Периметр: ', TrianglePS())
-    print('aboba')
