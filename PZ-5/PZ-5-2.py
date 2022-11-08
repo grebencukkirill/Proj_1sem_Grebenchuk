@@ -4,10 +4,11 @@
 
 def TrianglePS(a):
     P = a * 3
-
+    S = ((a**2)*(3**(1/2)))/4
+    return P, S
 
 for i in range(3):
-    a = input('Введите число: ')
+    a = input(f'Введите сторону {i+1} треугольника: ')
 
     while type(a) != int:  # Обработка исключений
         try:
@@ -15,5 +16,6 @@ for i in range(3):
         except ValueError:
             print('Неправильно ввели!')
             a = input('Введите число: ')
-
-    print('Периметр: ', TrianglePS())
+    P, S = TrianglePS(a)
+    print(f'Периметр {i+1} треугольника: {P}')
+    print(f'Площадь {i+1} треугольника: {S}')
