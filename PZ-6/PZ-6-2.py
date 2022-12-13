@@ -10,25 +10,18 @@ while type(a) != int: #Обработка исключений
     except ValueError:
         print('Неправильно ввели!')
         a = input('Введите число: ')
+
 nums = []
 for i in range(a):
     nums.append(random.randint(0, 10))
 print(*(nums))
-i = 0
-for num in nums:
-    if i == len(nums)-1 and len(nums) != 1:
-        if (num < nums[i - 1]) and (num < nums[0]):
-            print('Первый локальный минимум: ', num)
-            break
-        print('Локальный минимум отсутствует')
-        break
-    else:
-        print('Первый локальный минимум: ', nums[0])
-        break
-    if (num < nums[i-1]) and (num < nums[i+1]):
-        print('Первый локальный минимум: ', num)
+
+i = 1
+
+while i < a:
+    if nums[i-1]>nums[i]<nums[i+1]:
+        print('Первый локальный минимум: ', nums[i])
         break
     i += 1
 else:
     print('Локальный минимум отсутствует')
-
