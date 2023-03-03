@@ -3,7 +3,7 @@
 
 import re
 
-with open('hotline.txt') as file1:
+with open('hotline.txt', 'r', encoding='utf-8') as file1:
     a = file1.readlines()
 p = re.compile(r'[0-9]{11}')
 incorrect = []
