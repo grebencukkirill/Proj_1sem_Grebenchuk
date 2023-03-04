@@ -14,3 +14,18 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+import module
+
+module.get_set()
+
+module.get_txt()
+
+print(module.list_doc.doc)
+
+print(module.file_doc.doc)
+
+print(module.get_binary())
+
+print(dir(module))
