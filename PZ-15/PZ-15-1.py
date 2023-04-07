@@ -24,7 +24,7 @@ info_form = [
 info_list = [
     ('1', '3', '2022-05-10', '2022-05-15', 'Острый бронхит', 'J20.9', '0'),
     ('2', '12', '2022-08-02', '2022-08-09', 'Грипп', 'J11.1', '1'),
-    ('3', '6', '2023-04-02', '2023-04-6', 'Пневмония', 'J18.9', '0'),
+    ('3', '6', '2023-04-02', '2023-04-06', 'Пневмония', 'J18.9', '0'),
     ('4', '5', '2022-06-08', '2022-06-16', 'Ангина', 'J02.9', '1'),
     ('5', '17', '2022-12-24', '2022-12-28', 'Грипп', 'J11.1', '1'),
     ('6', '2', '2022-10-15', '2022-10-22', 'Острый бронхит', 'J20.9', '0'),
@@ -45,32 +45,42 @@ with sq.connect('salary.db') as con:
         hire_date DATE NOT NULL,
         post VARCHAR NOT NULL,
         department VARCHAR NOT NULL,
-        base_rate DECIMAL NOT NULL,
+        base_rate DECIMAL NOT NULL
     )""")
     cur.execute("""CREATE TABLE IF NOT EXISTS list(
         id INTEGER PRIMARY KEY,
-        id_p INTEGER PRIMARY KEY,
+        id_p INTEGER,
         starting_date DATE NOT NULL,
         ending_date DATE NOT NULL,
         reason VARCHAR NOT NULL,
         diagnosis VARCHAR NOT NULL,
         paid BOOLEAN NOT NULL,
-        FOREIGN KEY (id_p) REFERENCES from(id) ON DELETE CASCADE ON UPDATE CASCADE
+        FOREIGN KEY (id_p) REFERENCES form(id) ON DELETE CASCADE ON UPDATE CASCADE
     )""")
 
-with sq.connect('salary.db') as con:
-    cur = con.cursor()
-    cur.executemany('INSERT INTO form VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)', info_form)
-    cur.executemany('INSERT INTO form VALUES(?, ?, ?, ?, ?, ?, ?)', info_list)
+# with sq.connect('salary.db') as con:
+#     cur = con.cursor()
+#     cur.executemany('INSERT INTO form VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)', info_form)
+#     cur.executemany('INSERT INTO list VALUES(?, ?, ?, ?, ?, ?, ?)', info_list)
 
 with sq.connect('salary.db') as con:
     cur = con.cursor()
-    cur.execute('SELECT first_name, last_name, post FROM from')
-    cur.execute('SELECT first_name, last_name, base_rate FROM from')
-    cur.execute("SELECT first_name, last_name FROM from WHERE department='IT'")
-    cur.execute("SELECT first_name, last_name FROM from WHERE hire_date>'01.01.2022'")
-    cur.execute('SELECT * FROM list WHERE id_p=2')
-    cur.execute('SELECT * FROM list WHERE paid = 1')
-    cur.execute('SELECT * FROM list WHERE MONTH(starting_date)=MONTH(NOW())')
-    cur.execute("SELECT AVG(base_rate) AS base_rate_avg FROM form")
-    cur.execute("SELECT first_name, last_name FROM from WHERE baze_rate>100000")
+    cur.executescript("""SELECT first_name, last_name, post FROM form;
+    SELECT first_name, last_name, base_rate FROM form;
+    SELECT first_name, last_name FROM form WHERE department='IT';
+    SELECT first_name, last_name FROM form WHERE hire_date>'01.01.2022';
+    SELECT * FROM list WHERE id_p=2;
+    SELECT * FROM list WHERE paid = 1;
+    SELECT * FROM list WHERE STRFTIME('%Y-%m',starting_date)=STRFTIME('%Y-%m','now');
+    SELECT AVG(base_rate) AS base_rate_avg FROM form;
+    SELECT first_name, last_name FROM form WHERE base_rate>100000;
+    SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM list;
+    SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id);
+    SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id) WHERE STRFTIME('%Y-%m', list.starting_date) = STRFTIME('%Y-%m', 'now');
+    """)
+    result = cur.fetchall()
+    print(result)
+    cur.execute("SELECT SUM(julianday(ending_date) - julianday(starting_date)) FROM list;")
+    result = cur.fetchall()
+    print(result)
+
