@@ -64,24 +64,28 @@ with sq.connect('salary.db') as con:
 #     cur.executemany('INSERT INTO form VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)', info_form)
 #     cur.executemany('INSERT INTO list VALUES(?, ?, ?, ?, ?, ?, ?)', info_list)
 
-with sq.connect('salary.db') as con:
-    cur = con.cursor()
-    cur.executescript("""SELECT first_name, last_name, post FROM form;
-    SELECT first_name, last_name, base_rate FROM form;
-    SELECT first_name, last_name FROM form WHERE department='IT';
-    SELECT first_name, last_name FROM form WHERE hire_date>'01.01.2022';
-    SELECT * FROM list WHERE id_p=2;
-    SELECT * FROM list WHERE paid = 1;
-    SELECT * FROM list WHERE STRFTIME('%Y-%m',starting_date)=STRFTIME('%Y-%m','now');
-    SELECT AVG(base_rate) AS base_rate_avg FROM form;
-    SELECT first_name, last_name FROM form WHERE base_rate>100000;
-    SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM list;
-    SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id);
-    SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id) WHERE STRFTIME('%Y-%m', list.starting_date) = STRFTIME('%Y-%m', 'now');
-    """)
-    result = cur.fetchall()
-    print(result)
-    cur.execute("SELECT SUM(julianday(ending_date) - julianday(starting_date)) FROM list;")
-    result = cur.fetchall()
-    print(result)
+con = sq.connect('salary.db')
+cur = con.cursor()
+cur.executescript("""SELECT first_name, last_name, post FROM form;
+SELECT first_name, last_name, base_rate FROM form;
+SELECT first_name, last_name FROM form WHERE department='IT';
+SELECT first_name, last_name FROM form WHERE hire_date>'01.01.2022';
+SELECT * FROM list WHERE id_p=2;
+SELECT * FROM list WHERE paid = 1;
+SELECT * FROM list WHERE STRFTIME('%Y-%m',starting_date)=STRFTIME('%Y-%m','now');
+SELECT AVG(base_rate) AS base_rate_avg FROM form;
+SELECT first_name, last_name FROM form WHERE base_rate>100000;
+SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM list;
+SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id);
+SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id) WHERE STRFTIME('%Y-%m', list.starting_date) = STRFTIME('%Y-%m', 'now');
+""")
+result1 = cur.fetchall()
+
+cur.execute("SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM form, list;")
+result = cur.fetchall()
+
+cur.close()
+con.close()
+print(result)
+print(result1)
 
