@@ -79,13 +79,82 @@ SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM lis
 SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id);
 SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id) WHERE STRFTIME('%Y-%m', list.starting_date) = STRFTIME('%Y-%m', 'now');
 """)
-result1 = cur.fetchall()
-
-cur.execute("SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM form, list;")
+# Вывести список всех сотрудников и их должностей
+cur.execute("SELECT first_name, last_name, post FROM form")
 result = cur.fetchall()
+print(result)
+# Вывести список всех сотрудников и их базовых ставок
+cur.execute("SELECT first_name, last_name, base_rate FROM form")
+result = cur.fetchall()
+print(result)
+# Вывести список всех сотрудников, работающих в отделе "IT"
+cur.execute("SELECT first_name, last_name FROM form WHERE department='IT'")
+result = cur.fetchall()
+print(result)
+# Вывести список всех сотрудников, принятых на работу после 1 января 2022 года
+cur.execute("SELECT first_name, last_name FROM form WHERE hire_date>'01.01.2022'")
+result = cur.fetchall()
+print(result)
+# Вывести список всех больничных листов, выписанных сотруднику с id = 42
+cur.execute("SELECT * FROM list WHERE id_p=2")
+result = cur.fetchall()
+print(result)
+# Вывести список всех больничных листов, оплаченных компанией
+cur.execute("SELECT * FROM list WHERE paid = 1")
+result = cur.fetchall()
+print(result)
+# Вывести список всех сотрудников, имеющих больничные листы на текущий месяц
+cur.execute("SELECT * FROM list WHERE STRFTIME('%Y-%m',starting_date)=STRFTIME('%Y-%m','now')")
+result = cur.fetchall()
+print(result)
+# Вывести среднюю базовую ставку всех сотрудников
+cur.execute("SELECT AVG(base_rate) AS base_rate_avg FROM form")
+result = cur.fetchall()
+print(result)
+# Вывести список всех сотрудников, имеющих базовую ставку выше 100 000
+cur.execute("SELECT first_name, last_name FROM form WHERE base_rate>100000")
+result = cur.fetchall()
+print(result)
+# Вывести список всех сотрудников и общее количество дней, проведенных ими на больничном
+cur.execute("SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM list")
+result = cur.fetchall()
+print(result)
+# Вывести информацию о сотрудниках и их больничных листах за последний месяц
+cur.execute("SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id) WHERE STRFTIME('%Y-%m', list.starting_date) = STRFTIME('%Y-%m', 'now')")
+result = cur.fetchall()
+print(result)
+# Вывести среднюю продолжительность больничных листов сотрудников в каждом отделе
+cur.execute("SELECT form.department, SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM list INNER JOIN form ON (list.id_p=form.id) GROUP BY form.department")
+result = cur.fetchall()
+print(result)
+# Вывести список сотрудников и информацию о последнем больничном листе, который они оформляли
+cur.execute("SELECT form.first_name, form.last_name, MAX(STRFTIME('%Y-%m-%d', list.starting_date)) FROM list INNER JOIN form ON (list.id_p=form.id) GROUP BY form.id")
+result = cur.fetchall()
+print(result)
+# Вывести список сотрудников и информацию о первом больничном листе, который они оформляли
+cur.execute("SELECT form.first_name, form.last_name, MIN(STRFTIME('%Y-%m-%d', list.starting_date)) FROM list INNER JOIN form ON (list.id_p=form.id) GROUP BY form.id")
+result = cur.fetchall()
+print(result)
+# Вывести список сотрудников и суммарную продолжительность их больничных листов в текущем году
+cur.execute("SELECT form.first_name, form.last_name, SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM list INNER JOIN form ON (list.id_p=form.id) GROUP BY form.id")
+result = cur.fetchall()
+print(result)
+
+# UPDATE
+
+# Обновить базовую ставку сотрудника на определенной должности
+
+# Обновить отдел для всех сотрудников в определенном диапазоне возраста
+
+# Обновить дату найма для сотрудника, получившего повышение
+
+# Обновить причину больничного листа для сотрудника
+
+# Обновить базовую ставку сотрудника в таблице "Анкета" на определенный
+
+
+
 
 cur.close()
 con.close()
-print(result)
-print(result1)
 
