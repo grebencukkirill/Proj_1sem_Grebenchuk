@@ -79,6 +79,7 @@ SELECT SUM(julianday(list.ending_date) - julianday(list.starting_date)) FROM lis
 SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id);
 SELECT list.*, form.* FROM list INNER JOIN form ON (list.id_p=form.id) WHERE STRFTIME('%Y-%m', list.starting_date) = STRFTIME('%Y-%m', 'now');
 """)
+print('Select:')
 # Вывести список всех сотрудников и их должностей
 cur.execute("SELECT first_name, last_name, post FROM form")
 result = cur.fetchall()
@@ -95,7 +96,7 @@ print(result)
 cur.execute("SELECT first_name, last_name FROM form WHERE hire_date>'01.01.2022'")
 result = cur.fetchall()
 print(result)
-# Вывести список всех больничных листов, выписанных сотруднику с id = 42
+# Вывести список всех больничных листов, выписанных сотруднику с id = 2
 cur.execute("SELECT * FROM list WHERE id_p=2")
 result = cur.fetchall()
 print(result)
@@ -143,17 +144,52 @@ print(result)
 # UPDATE
 
 # Обновить базовую ставку сотрудника на определенной должности
-
+cur.execute("UPDATE form SET base_rate = 120000 WHERE post = 'Системный администратор'")
 # Обновить отдел для всех сотрудников в определенном диапазоне возраста
-
+cur.execute("UPDATE form SET department = 'Бухгалтерия' WHERE STRFTIME('%Y', 'now')-STRFTIME('%Y', birth_date) > 42")
 # Обновить дату найма для сотрудника, получившего повышение
-
+cur.execute("")
 # Обновить причину больничного листа для сотрудника
+cur.execute("UPDATE list SET reason = 'Ангина' WHERE id_p = 3")
+# Обновить базовую ставку сотрудника в таблице "Анкета" на определенный процент, используя INNER JOIN с таблицей "Больничные листы". При этом
+# необходимо исключить из обновления сотрудников, у которых были неоплаченные больничные листы.
+cur.execute("UPDATE form SET form.base_rate = form.base_rate * 1,08 FROM form JOIN list ON form.id = list.id_p WHERE list.paid = 1")
+# Обновить дату начала больничного листа в таблице "Больничные листы" на определенную дату, используя INNER JOIN с таблицей "Анкета".
+# При этом необходимо исключить из обновления больничные листы с уже пройденной датой начала
+cur.execute("")
+# Обновить причину больничного листа в таблице "Больничные листы" на определенное значение для всех сотрудников, работающих в отделе "Бухгалтерия".
+cur.execute("")
 
-# Обновить базовую ставку сотрудника в таблице "Анкета" на определенный
+# DELETE
 
-
-
+# Удалить все записи о больничных листах для сотрудника с именем "Иван"
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE first_name = 'Иван')")
+# Удалить все записи о больничных листах для сотрудника с фамилией "Петров"
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE last_name = 'Петров')")
+# Удалить все записи о больничных листах для сотрудника с должностью "Менеджер"
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE post = 'Менеджер')")
+# Удалить все записи о больничных листах для сотрудника с отделом "Отдел продаж"
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE department = 'Отдел продаж')")
+# Удалить все записи о больничных листах для сотрудника женского пола
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE sex = 'жен.')")
+# Удалить все записи о больничных листах для сотрудников старше 50 лет
+cur.execute("")
+# Удалить все записи о неоплаченных больничных листах
+cur.execute("")
+# Удалить все записи о больничных листах, дата окончания которых прошла
+cur.execute("")
+#  Удалить все записи о больничных листах, начиная с определенной даты
+cur.execute("")
+# Удалить все больничные листы сотрудника с именем "Иван" из таблицы "Больничные листы"
+cur.execute("")
+# Удалить все больничные листы сотрудников, чьи фамилии начинаются на букву "С" из таблицы "Больничные листы"
+cur.execute("")
+# Удалить все больничные листы, которые еще не были оплачены, у сотрудников с должностью "Менеджер" из таблицы "Больничные листы"
+cur.execute("")
+# Удалить все больничные листы, выписанные сотрудникам отдела "IT" в период с 1 января
+cur.execute("")
+# Удалить все больничные листы, связанные со сотрудниками старше 50 лет из таблицы "Больничные листы"
+cur.execute("")
 
 cur.close()
 con.close()
