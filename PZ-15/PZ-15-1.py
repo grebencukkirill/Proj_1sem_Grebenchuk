@@ -194,15 +194,20 @@ con.commit()
 cur.execute("DELETE FROM list WHERE")
 con.commit()
 # Удалить все больничные листы сотрудника с именем "Иван" из таблицы "Больничные листы"
-cur.execute("")
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE first_name = 'Иван')")
+con.commit()
 # Удалить все больничные листы сотрудников, чьи фамилии начинаются на букву "С" из таблицы "Больничные листы"
-cur.execute("")
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE last_name LIKE 'С%')")
+con.commit()
 # Удалить все больничные листы, которые еще не были оплачены, у сотрудников с должностью "Менеджер" из таблицы "Больничные листы"
-cur.execute("")
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE post = 'Менеджер') AND paid = 0")
+con.commit()
 # Удалить все больничные листы, выписанные сотрудникам отдела "IT" в период с 1 января
 cur.execute("")
+con.commit()
 # Удалить все больничные листы, связанные со сотрудниками старше 50 лет из таблицы "Больничные листы"
-cur.execute("")
+cur.execute("DELETE FROM list WHERE id_p IN (SELECT id FROM form WHERE STRFTIME('%Y', 'now')-STRFTIME('%Y', birth_date) > 50)")
+con.commit()
 
 cur.close()
 con.close()
