@@ -10,11 +10,14 @@
 # Сумма квадратов четных элементов:
 # Среднее арифметическое суммы квадратов четных элементов:
 import numpy as np
+import random
 
-l = '56 -98 48 -21 21 -47'
+l = [random.randint(-100, 100) for i in range(random.randint(2, 10))]
+
 
 f1 = open('input_data.txt', 'w')
-f1.writelines(l)
+for i in l:
+    f1.write(str(i)+' ')
 f1.close()
 
 k = list(map(int, (((open('input_data.txt')).read()).split())))
@@ -25,7 +28,7 @@ for i in range(len(k)):
         sq.append(k[i]**2)
         sum += k[i]**2
 f3 = open('output_data.txt', 'w')
-print('Исходные данные:', str(l),
+print('Исходные данные:', " ".join(str(i) for i in k),
       '\nКоличество элементов:', str(len(k)),
       '\nМинимальный элемент:', str(min(k)),
       '\nКвадраты четных элементов:', *list(map(str, (sq))),
