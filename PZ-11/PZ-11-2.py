@@ -10,7 +10,7 @@ sum = 0
 digits = ''
 stih = ''
 for i in range(4):
-    sum += text[i].count('.') + text[i].count(',') + text[i].count('!') + text[i].count('?') + text[i].count(':') + text[i].count(';')
+    sum += text[i].count('.') + text[i].count(',') + text[i].count('!') + text[i].count('?') + text[i].count(':') + text[i].count(';') + text[i].count('«') + text[i].count('»')
 for i in range(len(text[2].replace('\n', '').rstrip())):
     digits += str(ord(text[2][i]))
     digits += ' '

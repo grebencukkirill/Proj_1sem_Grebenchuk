@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>KT 3</title>
+    <script>
+        function ilike() {
+            alert("Мне наравиться " + document.form1.shape.value + ", чей цвет " + document.form1.color.value)
+        }
+        function warning() {
+            alert("Внимательно вводите свое имя")
+        }
+        function choice() {
+            alert("Вы выбрали " + document.form2.choiceradio.value)
+        }
+        function gratitute() {
+            alert(document.form2.username.value+ ", спасибо за участие в опросе")
+        }
+    </script>
+</head>
+<body>
+    <form name="form1">
+        <h1>Форма 1</h1><br />
+        <label>Геометрическая фигура<input type="text" name="shape" autocomplete="off" /></label><br /><br />
+        <label>Цвет<input type="text" name="color" autocomplete="off" /></label><br /><br />
+        <input type="submit" onclick="ilike()" />
+    </form>
+    <br />
+    <form name="form2">
+        <h1>Форма 2</h1><br />
+        <label>Введите ваше имя<input type="text" name="username" onclick="warning()"/></label><br />
+        <br />
+        <fieldset onchange="choice()" style="border: none; padding:0px;">
+            <label>Мороженное<input type="radio" name="choiceradio" value="мороженное" /></label>
+            <label>Шоколад<input type="radio" name="choiceradio" value="шоколад" /></label>
+        </fieldset>
+        <br />
+        <input type="submit" onclick="gratitute()" />
+    </form>
+</body>
+</html>

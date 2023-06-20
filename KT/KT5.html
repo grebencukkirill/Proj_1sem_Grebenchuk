@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>KT5</title>
+</head>
+<body>
+    <h1>Часть 1</h1>
+    <script>
+        let word = "Антресоль".toLowerCase()
+        document.write(word[7] + word[4] + word[5] + ', ')
+        document.write(word[5] + word[2] + word[6] + ', ')
+        document.write(word[4] + word[5] + word[2] + word[8] + ', ')
+        document.write(word[7] + word[6] + word[5] + word[8] + ', ')
+        document.write(word[7] + word[4] + word[1] + word[2] + word[0])
+    </script>
+    <script>
+        document.write("<BR>");
+        for (let i = 0; i < 11; i++) {
+            document.write(String.fromCodePoint(0x1F621));
+
+        }
+        //вторая строка
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621));
+
+        //третья строка
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621));
+
+        //четвертая строка
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621));
+
+        //пятая строка
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621));
+
+        //шестая строка
+        document.write("<BR>");
+        for (let i = 0; i < 11; i++) {
+            document.write(String.fromCodePoint(0x1F621));
+        }
+
+        //седьмая строка
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621));
+
+        //восьмая строка
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621));
+
+        document.write("<BR>");
+        document.write(String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F47F) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621) +
+            String.fromCodePoint(0x1F621));
+
+        document.write("<BR>");
+        for (let i = 0; i < 11; i++) {
+            document.write(String.fromCodePoint(0x1F621));
+
+        }
+
+    </script>
+    <h1>Часть 2</h1>
+    <script>
+        function y1() {
+            let x = document.form1.xInput.value;
+            alert("y = " + 3 * Math.sin(x + Math.PI / x));
+        }
+        function y2() {
+            let x1 = document.form2.xInput1.value;
+            alert("y = " + Math.tan(x1) * Math.sin(x1) + (1 / Math.tan(x1)) ** 2);
+        }
+    </script>
+    <form name="form1">
+        <input type="number" placeholder="Введите x" name="xInput" />
+        <input type="submit" onclick="y1()" />
+    </form>
+    <br />
+    <form name="form2">
+        <input type="number" placeholder="Введите x" name="xInput1" />
+        <input type="submit" onclick="y2()" />
+    </form>
+    <h1>Часть 3</h1>
+    <script>
+        function perimetr(a, b) {
+            return alert("Периметр: " + (Math.abs(a) * 2 + Math.abs(b) * 2));
+        }
+        function factorial(n) {
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+        function range(a, b) {
+            let sum = 0;
+            for (i = a; i < b; i++) {
+                if (i % 2 != 0) {
+                    sum += factorial(i);
+                }
+            }
+            return alert("Сумма нечетных чисел равна " + sum)
+        }
+        function nlist(n) {
+            let str = '';
+            for (i = 0; i < n; i++) {
+                str += "*";
+            }
+            document.write(str)
+        }
+    </script>
+    <form name="form3">
+        <h2>1</h2>
+        <input type="number" placeholder="Введите a" name="aInput1" /><br /><br />
+        <input type="number" placeholder="Введите b" name="bInput1" /><br /><br />
+        <input type="submit" onclick="perimetr(document.form3.aInput1.value, document.form3.bInput1.value)" />
+    </form>
+    <br />
+    <form name="form4">
+        <h2>2</h2>
+        <input type="number" placeholder="Введите a" name="aInput2" /><br /><br />
+        <input type="number" placeholder="Введите b" name="bInput2" /><br /><br />
+        <input type="submit" onclick="range(document.form4.aInput2.value, document.form4.bInput2.value)" />
+    </form>
+    <br />
+    <form name="form5">
+        <h2>3</h2>
+        <input type="number" placeholder="Введите N" name="nInput" />
+        <input type="submit" onclick="nlist(document.form5.nInput.value)" />
+    </form>
+    <h2>4</h2>
+    <script>
+        function sum(obj) {
+            let num1 = Number(obj.num1.value);
+            let num2 = Number(obj.num2.value);
+            let num3 = Number(obj.num3.value);
+            let s = num1 + num3 + num3;
+            let n = 0.13 * s;
+            let m = s - n;
+            document.write("<BR><pre>Сумма за квартал:<input type='text' value='" + s +
+                "' /><BR><BR>Налог: <input type='text' value='" + n +
+                "' /><BR><BR>Сумма, выдаваемая на руки<input type='text' value='" + m + "' />");
+        }
+    </script>
+    <form name="form6">
+        <p>Введите суммы за каждый месяц и нажмите кнопку <b>Вычислить</b></p>
+        <pre>
+            Январь:<input type="text" name="num1" size="10" /><br /><br />
+            Февраль:<input type="text" name="num2" size="10" /><br /><br />
+            Март:<input type="text" name="num3" size="10" /><br /><br />
+
+        <input type="button" value="Вычислить" onclick="sum(form6)" />
+        </pre>
+        <input type="reset" />
+
+    </form>
+
+</body>
+</html>
