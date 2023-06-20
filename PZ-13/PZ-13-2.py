@@ -2,12 +2,13 @@
 
 import random
 import numpy as np
+from array import *
 
 size = random.randint(2, 10)
 n = np.array([[random.randint(-10, 10) for i in range(size)] for j in range(size)])
 print('Изначальная матрица:')
 print(n)
-res = []
+res = array('i')
 for i in n:
     for j in i:
         if (j%2==0) and (j>0):
